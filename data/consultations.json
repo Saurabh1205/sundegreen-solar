@@ -1,0 +1,96 @@
+[
+  {
+    "id": 1781590461693,
+    "name": "Test User",
+    "whatsapp": "9999999999",
+    "pincode": "400001",
+    "bill": "Less than ₹1500",
+    "createdAt": "2026-06-16T06:14:21.693Z"
+  },
+  {
+    "id": 1781592584474,
+    "name": "John Doe",
+    "whatsapp": "9876543210",
+    "pincode": "400001",
+    "bill": "Less than ₹1500",
+    "createdAt": "2026-06-16T06:49:44.474Z"
+  },
+  {
+    "id": 1782212786091,
+    "name": "Jane Tester",
+    "whatsapp": "9888888888",
+    "email": "jane@test.com",
+    "pincode": "400001",
+    "bill": "₹2,500 - ₹4,000",
+    "serviceType": "Residential Solar",
+    "message": "Test with timeout fallback.",
+    "createdAt": "2026-06-23T11:06:23.075Z"
+  },
+  {
+    "id": 1782213103315,
+    "name": "saurabh manohar nagare",
+    "whatsapp": "8007180374",
+    "email": "abc@gmail.com",
+    "pincode": "440032",
+    "bill": "₹4,000 - ₹8,000",
+    "serviceType": "Residential Solar",
+    "message": null,
+    "createdAt": "2026-06-23T11:11:40.297Z"
+  },
+  {
+    "id": 1782214926484,
+    "name": "Jane Lead Tester",
+    "whatsapp": "9123456789",
+    "email": "jane@lead.com",
+    "pincode": "400001",
+    "bill": "₹2,500 - ₹4,000",
+    "serviceType": "Residential Solar",
+    "message": "Interested in grid connection.",
+    "suggestedKw": 4,
+    "brand": "Waaree Mono Perc",
+    "quotePrice": 202000,
+    "leadPriority": "High Priority",
+    "source": "Quote Page",
+    "inspectionDetails": {
+      "preferredDate": "2026-06-28",
+      "preferredTime": "Morning (9 AM - 12 PM)",
+      "address": "Flat 101, Solar Heights, Mumbai",
+      "landmark": "Opposite High Court"
+    },
+    "createdAt": "2026-06-23T11:42:03.475Z"
+  },
+  {
+    "id": 1782216829318,
+    "name": "abc",
+    "whatsapp": "6655449988",
+    "email": "abc@gmail.com",
+    "pincode": "440032",
+    "bill": "₹4,000 - ₹8,000",
+    "serviceType": "Residential Solar",
+    "message": null,
+    "suggestedKw": 6,
+    "brand": "Tata Power Solar",
+    "quotePrice": 372000,
+    "leadPriority": "High Priority",
+    "source": "Quote Page",
+    "inspectionDetails": null,
+    "createdAt": "2026-06-23T12:13:46.303Z"
+  },
+  {
+    "id": 1782220782969,
+    "name": "tester 1",
+    "whatsapp": "8007180374",
+    "email": null,
+    "pincode": "440032",
+    "bill": "₹4000 - ₹8000",
+    "serviceType": null,
+    "message": null,
+    "suggestedKw": null,
+    "brand": null,
+    "quotePrice": null,
+    "leadPriority": "High Priority",
+    "source": "Direct",
+    "inspectionDetails": null,
+    "createdAt": "2026-06-23T13:19:39.954Z"
+  }
+]

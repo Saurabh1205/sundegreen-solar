@@ -1,3 +1,27 @@
+# Sundegreen Solar — Next.js App
+
+This repository is a production-ready scaffold for Sundegreen Solar built with Next.js 15, TypeScript and Tailwind CSS.
+
+Quick start:
+
+1. Install dependencies:
+
+```bash
+npm install
+```
+
+2. Run dev server:
+
+```bash
+npm run dev
+```
+
+Build for production:
+
+```bash
+npm run build
+npm start
+```
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
 ## Getting Started
