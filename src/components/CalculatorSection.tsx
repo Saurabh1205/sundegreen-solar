@@ -15,17 +15,27 @@ export default function CalculatorSection({ isSubpage = false }: { isSubpage?: b
   })
 
   useEffect(() => {
-    // Simple calculation logic
-    const systemSize = monthlyBill / 150 // Rough estimate: 150 per kW per month
-    const costPerKW = 80000 // ₹80,000 per kW
+    // 1000 RS bill = 1 kW ratio
+    const systemSize = Number((monthlyBill / 1000).toFixed(1))
+    const costPerKW = 70000 // ₹70,000 per kW
     const installationCost = systemSize * costPerKW
-    const subsidy = installationCost * 0.4 // 40% subsidy
+    
+    // PM-Surya Ghar subsidy rules
+    let subsidy = 0
+    if (systemSize >= 3) {
+      subsidy = 78000
+    } else if (systemSize >= 2) {
+      subsidy = 60000
+    } else {
+      subsidy = systemSize * 30000
+    }
+
     const netCost = installationCost - subsidy
-    const annualSavings = monthlyBill * 12 * 0.9 // 90% savings
+    const annualSavings = monthlyBill * 12 // 100% bill coverage savings
     const paybackPeriod = netCost / annualSavings
 
     setResults({
-      systemSize: Math.round(systemSize * 10) / 10,
+      systemSize: systemSize,
       installationCost: Math.round(installationCost),
       subsidy: Math.round(subsidy),
       annualSavings: Math.round(annualSavings),

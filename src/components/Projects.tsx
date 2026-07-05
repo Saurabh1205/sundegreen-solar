@@ -31,6 +31,7 @@ const projects: Project[] = [
     image: '/industrial_solar.png',
     savings: '₹8,50,000/year savings',
   },
+  /*
   {
     id: '4',
     title: 'Gujarat Agricultural Farm',
@@ -38,6 +39,7 @@ const projects: Project[] = [
     image: '/solar_water_pump.png',
     savings: '₹25,000/year savings',
   },
+  */
   {
     id: '5',
     title: 'Chennai Manufacturing Unit',

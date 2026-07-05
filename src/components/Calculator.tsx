@@ -5,9 +5,9 @@ export default function Calculator(){
   const [bill,setBill]=useState(5000)
   const monthlyBill = bill
   const recommendedKW = Math.max(1, Math.round(monthlyBill / 1000))
-  const yearlySavings = Math.round((recommendedKW * 4) * 12)
-  const carbonReduction = Math.round(recommendedKW * 1.2 * 365)
-  const roiYears = Math.max(1, Math.round((recommendedKW * 60000) / yearlySavings))
+  const yearlySavings = recommendedKW * 12000
+  const carbonReduction = Math.round(recommendedKW * 800)
+  const roiYears = 3.5
 
   return (
     <section className="py-12">

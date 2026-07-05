@@ -626,8 +626,8 @@ export default function AdminDashboard() {
     const nextRef = quotations.length + 216
     setQuoteRefNo(String(nextRef))
     
-    const is3KW = lead ? (lead.suggestedKw === 3 || (lead.bill && lead.bill.includes('1500') === false)) : true
-    setQuoteCapacity(is3KW ? 'For 3 KW' : 'For 5 KW')
+    const is3KW = lead ? (lead.suggestedKw === 3 || (lead.projectDetails?.surveyRecommendedKw === 3)) : true
+    setQuoteCapacity(is3KW ? 'For 3 KW' : `For ${lead?.suggestedKw || 3} KW`)
     setQuoteTotalCost(is3KW ? 190000 : 310000)
     setQuoteGovtSubsidy(is3KW ? 78000 : 78000)
 

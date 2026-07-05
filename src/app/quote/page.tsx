@@ -54,7 +54,7 @@ export default function QuotePage() {
     setSending(true)
     setError('')
 
-    // Calculations based on Bill range
+    const billVal = parseFloat(bill) || 0
     let suggestedKw = 3
     let brand = 'Waaree Mono Perc'
     let baseCost = 210000
@@ -62,41 +62,30 @@ export default function QuotePage() {
     let monthlySavings = 2500
     let leadPriority = 'Low Priority'
 
-    if (bill === 'Less than ₹1,500') {
-      suggestedKw = 2
-      brand = 'Adani Solar'
-      baseCost = 144000
-      subsidy = 60000
-      monthlySavings = 1400
-      leadPriority = 'Low Priority'
-    } else if (bill === '₹1,500 - ₹2,500') {
-      suggestedKw = 3
-      brand = 'Waaree Mono Perc'
-      baseCost = 210000
-      subsidy = 78000
-      monthlySavings = 2500
-      leadPriority = 'Low Priority'
-    } else if (bill === '₹2,500 - ₹4,000') {
-      suggestedKw = 4
-      brand = 'Waaree Mono Perc'
-      baseCost = 280000
-      subsidy = 78000
-      monthlySavings = 4000
-      leadPriority = 'High Priority'
-    } else if (bill === '₹4,000 - ₹8,000') {
-      suggestedKw = 6
+    if (serviceType === 'Residential Solar') {
+      // 1000 RS bill = 1 kW ratio
+      suggestedKw = Math.max(1, Math.round(billVal / 1000))
+      brand = suggestedKw >= 5 ? 'Tata Power Solar' : suggestedKw >= 3 ? 'Waaree Mono Perc' : 'Adani Solar'
+      baseCost = suggestedKw * 70000
+      
+      // PM-Surya Ghar subsidy rules: 1 kW = 30k, 2 kW = 60k, >=3 kW = 78k max
+      if (suggestedKw === 1) {
+        subsidy = 30000
+      } else if (suggestedKw === 2) {
+        subsidy = 60000
+      } else {
+        subsidy = 78000
+      }
+      monthlySavings = suggestedKw * 1000
+      leadPriority = suggestedKw >= 5 ? 'Very High Priority' : suggestedKw >= 3 ? 'High Priority' : 'Low Priority'
+    } else {
+      // Commercial / Industrial Solar
+      suggestedKw = Math.max(1, Math.round(billVal / 1000))
       brand = 'Tata Power Solar'
-      baseCost = 450000
-      subsidy = 78000
-      monthlySavings = 7200
-      leadPriority = 'High Priority'
-    } else if (bill === 'More than ₹8,000') {
-      suggestedKw = 10
-      brand = 'Tata Power Solar'
-      baseCost = 750000
-      subsidy = 78000
-      monthlySavings = 12000
-      leadPriority = 'Very High Priority'
+      baseCost = suggestedKw * 65000
+      subsidy = 0 // No subsidy for commercial/industrial
+      monthlySavings = suggestedKw * 1200
+      leadPriority = suggestedKw >= 10 ? 'Very High Priority' : 'High Priority'
     }
 
     const quotePrice = baseCost - subsidy
@@ -383,21 +372,17 @@ I'd like to proceed with booking a site survey.`
                       </div>
                       <div>
                         <label className="block text-sm font-600 text-gray-700 mb-2">
-                          Monthly Electricity Bill <span className="text-red-500">*</span>
+                          Monthly Electricity Bill (₹) <span className="text-red-500">*</span>
                         </label>
-                        <select
+                        <input
+                          type="number"
+                          min="100"
+                          required
                           value={bill}
                           onChange={(e) => setBill(e.target.value)}
-                          className="w-full bg-white"
-                          required
-                        >
-                          <option value="">Select bill range</option>
-                          <option value="Less than ₹1,500">Less than ₹1,500</option>
-                          <option value="₹1,500 - ₹2,500">₹1,500 - ₹2,500</option>
-                          <option value="₹2,500 - ₹4,000">₹2,500 - ₹4,000</option>
-                          <option value="₹4,000 - ₹8,000">₹4,000 - ₹8,000</option>
-                          <option value="More than ₹8,000">More than ₹8,000</option>
-                        </select>
+                          placeholder="e.g. 3500"
+                          className="w-full bg-white border border-gray-300 rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-green-500"
+                        />
                       </div>
                     </div>
 
@@ -415,8 +400,8 @@ I'd like to proceed with booking a site survey.`
                         <option value="Residential Solar">Residential (Home/Society) Solar</option>
                         <option value="Commercial Solar">Commercial (Office/Institutional) Solar</option>
                         <option value="Industrial Solar">Industrial (Factory/Shed) Solar</option>
-                        <option value="Solar Water Pump">Solar Water Pump (Agriculture)</option>
-                        <option value="Battery Backup">Off-Grid Battery Backup Storage</option>
+                        {/* <option value="Solar Water Pump">Solar Water Pump (Agriculture)</option> */}
+                        {/* <option value="Battery Backup">Off-Grid Battery Backup Storage</option> */}
                         <option value="AMC Services">Annual Maintenance Contract (AMC)</option>
                       </select>
                     </div>

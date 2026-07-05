@@ -88,6 +88,7 @@ const services: Service[] = [
       'SCADA based remote monitoring and grid synchronization panels'
     ]
   },
+  /*
   {
     id: '4',
     image: '/solar_water_pump.png',
@@ -134,6 +135,7 @@ const services: Service[] = [
       'Automatic transfer switch (ATS) sub-panels'
     ]
   },
+  */
   {
     id: '6',
     image: '/amc_maintenance.png',

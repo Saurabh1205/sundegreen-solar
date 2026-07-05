@@ -60,7 +60,7 @@ export default async function Footer() {
                 <li><a href="#" className="text-gray-400 hover:text-green-400 transition">Commercial Solar</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-green-400 transition">Industrial Solar</a></li>
                 <li><a href="#" className="text-gray-400 hover:text-green-400 transition">Solar Panels</a></li>
-                <li><a href="#" className="text-gray-400 hover:text-green-400 transition">Battery Storage</a></li>
+                <li><a href="#" className="text-gray-400 hover:text-green-400 transition">AMC Services</a></li>
               </ul>
             </div>
 

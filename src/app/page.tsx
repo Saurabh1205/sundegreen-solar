@@ -3,6 +3,7 @@ import Hero from '../components/Hero'
 import StatisticsSection from '../components/StatisticsSection'
 import Services from '../components/Services'
 import WhyChooseUs from '../components/WhyChooseUs'
+import PMSuryaGharSection from '../components/PMSuryaGharSection'
 import CalculatorSection from '../components/CalculatorSection'
 import Projects from '../components/Projects'
 import TestimonialsSection from '../components/TestimonialsSection'
@@ -16,6 +17,7 @@ export default function Home() {
         <TopBanner />
       </div>
       <Hero />
+      <PMSuryaGharSection />
       <StatisticsSection />
       <Services />
       <WhyChooseUs />
