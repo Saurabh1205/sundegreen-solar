@@ -4,9 +4,6 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   experimental: {
     typedRoutes: false
-  },
-  eslint: {
-    ignoreDuringBuilds: true
   }
 }
 

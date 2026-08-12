@@ -303,6 +303,7 @@ export default function QuotationPrintPage({ params }: { params: Promise<{ id: s
           </div>
 
         </div>
+        </div>
       </div>
 
       <style jsx global>{`
