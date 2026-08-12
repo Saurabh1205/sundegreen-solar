@@ -146,7 +146,7 @@ export default function InvoicePrintPage({ params }: { params: Promise<{ id: str
     if (integer === 0) {
       str = 'Zero '
     } else {
-      let n = String(integer).padStart(9, '0')
+      const n = String(integer).padStart(9, '0')
       const match = n.match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/)
       if (match) {
         const crore = parseInt(match[1])
@@ -191,8 +191,9 @@ export default function InvoicePrintPage({ params }: { params: Promise<{ id: str
         </button>
       </div>
 
-      {/* Invoice Container - Styled to fit on standard A4 page */}
-      <div className="max-w-[800px] mx-auto bg-white border border-gray-300 p-8 shadow-md print:shadow-none print:border-none print:p-0 space-y-6">
+      <div className="w-full overflow-x-auto no-print-scroll">
+        {/* Invoice Container - Styled to fit on standard A4 page */}
+        <div className="min-w-[760px] max-w-[800px] mx-auto bg-white border border-gray-300 p-4 sm:p-8 shadow-md print:shadow-none print:border-none print:p-0 space-y-6">
         
         {/* Document Title */}
         <div className="text-center font-bold text-lg border-b border-gray-300 pb-2 uppercase tracking-wide">
@@ -246,7 +247,7 @@ export default function InvoicePrintPage({ params }: { params: Promise<{ id: str
 
             <div className="grid grid-cols-2 divide-x divide-gray-300">
               <div className="p-3">
-                <div className="font-bold text-gray-500 text-[10px]">Supplier's Ref.</div>
+                <div className="font-bold text-gray-500 text-[10px]">Supplier&apos;s Ref.</div>
                 <div className="mt-0.5">{invoice.invoiceNo}</div>
               </div>
               <div className="p-3">
@@ -257,7 +258,7 @@ export default function InvoicePrintPage({ params }: { params: Promise<{ id: str
 
             <div className="grid grid-cols-2 divide-x divide-gray-300">
               <div className="p-3">
-                <div className="font-bold text-gray-500 text-[10px]">Buyer's Order No.</div>
+                <div className="font-bold text-gray-500 text-[10px]">Buyer&apos;s Order No.</div>
                 <div className="mt-0.5 text-gray-400">—</div>
               </div>
               <div className="p-3">
@@ -461,12 +462,16 @@ export default function InvoicePrintPage({ params }: { params: Promise<{ id: str
           </div>
         </div>
 
+        </div>
       </div>
 
       <style jsx global>{`
         @media print {
           .no-print {
             display: none !important;
+          }
+          .no-print-scroll {
+            overflow: visible !important;
           }
           body {
             background-color: white !important;

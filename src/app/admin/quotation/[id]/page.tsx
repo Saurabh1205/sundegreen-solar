@@ -94,8 +94,9 @@ export default function QuotationPrintPage({ params }: { params: Promise<{ id: s
         </button>
       </div>
 
-      {/* Invoice Container - Styled to fit on standard A4 page */}
-      <div className="max-w-[800px] mx-auto bg-white border border-gray-300 p-8 shadow-md print:shadow-none print:border-none print:p-0 space-y-6">
+      <div className="w-full overflow-x-auto no-print-scroll">
+        {/* Invoice Container - Styled to fit on standard A4 page */}
+        <div className="min-w-[760px] max-w-[800px] mx-auto bg-white border border-gray-300 p-4 sm:p-8 shadow-md print:shadow-none print:border-none print:p-0 space-y-6">
         
         {/* Shree Krishan line */}
         <div className="text-center text-[10px] font-bold text-red-700 uppercase tracking-widest italic">
@@ -232,12 +233,12 @@ export default function QuotationPrintPage({ params }: { params: Promise<{ id: s
 
               <div>
                 <span className="font-bold text-gray-400">Warranty Terms (Solar Panel):</span><br />
-                25 Years Manufacturer's Performance Warranty. No Warranty for Physical Damage.
+                25 Years Manufacturer&apos;s Performance Warranty. No Warranty for Physical Damage.
               </div>
 
               <div>
                 <span className="font-bold text-gray-400">Warranty Terms (Solar Inverter):</span><br />
-                10 Years Manufacturer's Warranty. No warranty will be Entertained on Physical Damage.
+                10 Years Manufacturer&apos;s Warranty. No warranty will be Entertained on Physical Damage.
               </div>
 
               <div>
@@ -302,13 +303,15 @@ export default function QuotationPrintPage({ params }: { params: Promise<{ id: s
           </div>
 
         </div>
-
       </div>
 
       <style jsx global>{`
         @media print {
           .no-print {
             display: none !important;
+          }
+          .no-print-scroll {
+            overflow: visible !important;
           }
           body {
             background-color: white !important;

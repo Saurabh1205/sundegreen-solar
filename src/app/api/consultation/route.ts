@@ -2,29 +2,7 @@ import { db } from '../../../lib/firebase'
 import { collection, addDoc, getDocs, query, orderBy, serverTimestamp, doc, updateDoc } from 'firebase/firestore'
 import { promises as fs } from 'fs'
 import path from 'path'
-
-interface ConsultationEntry {
-  id: string | number
-  name: string
-  whatsapp: string
-  email?: string | null
-  pincode?: string | null
-  bill?: string | null
-  serviceType?: string | null
-  message?: string | null
-  suggestedKw?: number | null
-  brand?: string | null
-  quotePrice?: number | null
-  leadPriority?: string | null
-  source?: string | null
-  inspectionDetails?: {
-    preferredDate: string
-    preferredTime: string
-    address: string
-    landmark?: string | null
-  } | null
-  createdAt: string
-}
+import { ConsultationEntry } from '../../../types'
 
 // Check if Firebase variables are set up
 const hasFirebaseConfig = () => {
@@ -69,7 +47,7 @@ export async function POST(req: Request) {
 
     const leadPriority = calculateLeadPriority(bill)
 
-    const entryData = {
+    const entryData: Omit<ConsultationEntry, 'id'> = {
       name,
       whatsapp,
       email: email || null,
@@ -176,7 +154,7 @@ export async function PATCH(req: Request) {
       return new Response(JSON.stringify({ error: 'Missing leadId' }), { status: 400 })
     }
 
-    const updateData: any = {}
+    const updateData: Partial<ConsultationEntry> = {}
 
     if (inspectionDetails) {
       const { preferredDate, preferredTime, address, landmark } = inspectionDetails

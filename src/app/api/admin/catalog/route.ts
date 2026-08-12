@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '../../../../lib/firebase'
 import { collection, getDocs, doc, setDoc, deleteDoc } from 'firebase/firestore'
+import { CatalogItem } from '../../../../types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -32,7 +33,7 @@ const hasFirebaseConfig = () => {
 }
 
 // Helper to load catalog from JSON fallback
-async function readLocalCatalog(): Promise<any[]> {
+async function readLocalCatalog(): Promise<CatalogItem[]> {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'catalog.json')
   try {
@@ -53,14 +54,14 @@ async function readLocalCatalog(): Promise<any[]> {
 }
 
 // Helper to write catalog to JSON fallback
-async function writeLocalCatalog(data: any[]) {
+async function writeLocalCatalog(data: CatalogItem[]) {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'catalog.json')
   await fs.mkdir(dataDir, { recursive: true })
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8')
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     if (hasFirebaseConfig()) {
       try {

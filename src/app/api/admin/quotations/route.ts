@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '../../../../lib/firebase'
 import { collection, getDocs, doc, setDoc } from 'firebase/firestore'
+import { Quotation } from '../../../../types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -15,7 +16,7 @@ const hasFirebaseConfig = () => {
 }
 
 // Local file helpers for Quotations
-async function readLocalQuotations(): Promise<any[]> {
+async function readLocalQuotations(): Promise<Quotation[]> {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'quotations.json')
   try {
@@ -27,14 +28,14 @@ async function readLocalQuotations(): Promise<any[]> {
   }
 }
 
-async function writeLocalQuotations(data: any[]) {
+async function writeLocalQuotations(data: Quotation[]) {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'quotations.json')
   await fs.mkdir(dataDir, { recursive: true })
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8')
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     if (hasFirebaseConfig()) {
       try {
@@ -74,11 +75,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Read existing quotations to compute sequential Reference No
-    let existingQuotations: any[] = []
+    let existingQuotations: Quotation[] = []
     if (hasFirebaseConfig()) {
       try {
         const snap = await getDocs(collection(db, 'quotations'))
-        existingQuotations = snap.docs.map(d => d.data())
+        existingQuotations = snap.docs.map(d => ({ id: d.id, ...d.data() } as Quotation))
       } catch {}
     } else {
       existingQuotations = await readLocalQuotations()

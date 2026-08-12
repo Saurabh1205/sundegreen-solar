@@ -88,54 +88,6 @@ const services: Service[] = [
       'SCADA based remote monitoring and grid synchronization panels'
     ]
   },
-  /*
-  {
-    id: '4',
-    image: '/solar_water_pump.png',
-    title: 'Solar Water Pumps',
-    description: 'Eco-friendly water pumping solutions powered by solar energy for agricultural and industrial use.',
-    icon: '🚜',
-    capacity: '3 HP to 10 HP',
-    space: 'Requires dedicated ground space (approx 100-300 sq. ft.)',
-    warranty: '25 Years on Panels, 5 Years on Pump Controller',
-    subsidy: 'Available under PM-KUSUM Scheme',
-    benefits: [
-      'Uninterrupted day-time irrigation without depending on grid power',
-      'Zero monthly running fuel cost compared to diesel engines',
-      'Durable and weather-resistant agricultural pump controller',
-      'Promotes micro-irrigation and highly optimized farm yields'
-    ],
-    components: [
-      'Polycrystalline or Mono Solar Panels',
-      'Submersible / Surface DC Solar Pump (CRI/Shakti/Luby)',
-      'Solar Pump Controller with MPPT tracking',
-      'Manual tracking ground mount structures'
-    ]
-  },
-  {
-    id: '5',
-    image: '/battery_backup.png',
-    title: 'Battery Backup',
-    description: 'Advanced battery storage systems to ensure uninterrupted power supply during outages.',
-    icon: '🔋',
-    capacity: '5kWh to 50kWh',
-    space: 'Wall-mounted or compact floor rack (indoor)',
-    warranty: '5 to 10 Years on Lithium-ion Batteries',
-    subsidy: 'No direct subsidies for storage at present',
-    benefits: [
-      'Seamless backup power during grid failures (zero transit lag)',
-      'Store excess daytime solar generation for evening/night use',
-      'Avoid expensive diesel generator usage and diesel purchasing',
-      'Long lifespan (up to 6000 cycles with Lithium Ferro Phosphate)'
-    ],
-    components: [
-      'LiFePO4 (LFP) Battery Packs (BYD/Pylontech/Custom)',
-      'Hybrid Inverter with dual grid/solar input capabilities',
-      'Battery Management System (BMS) with thermal protection',
-      'Automatic transfer switch (ATS) sub-panels'
-    ]
-  },
-  */
   {
     id: '6',
     image: '/amc_maintenance.png',

@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { db } from '../../../../lib/firebase'
 import { collection, getDocs, doc, setDoc, updateDoc } from 'firebase/firestore'
+import { Invoice, InvoiceItem, ConsultationEntry } from '../../../../types'
 import { promises as fs } from 'fs'
 import path from 'path'
 
@@ -15,7 +16,7 @@ const hasFirebaseConfig = () => {
 }
 
 // Local file helpers for Invoices
-async function readLocalInvoices(): Promise<any[]> {
+async function readLocalInvoices(): Promise<Invoice[]> {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'invoices.json')
   try {
@@ -27,7 +28,7 @@ async function readLocalInvoices(): Promise<any[]> {
   }
 }
 
-async function writeLocalInvoices(data: any[]) {
+async function writeLocalInvoices(data: Invoice[]) {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'invoices.json')
   await fs.mkdir(dataDir, { recursive: true })
@@ -35,7 +36,7 @@ async function writeLocalInvoices(data: any[]) {
 }
 
 // Local file helpers for Consultations (leads)
-async function readLocalConsultations(): Promise<any[]> {
+async function readLocalConsultations(): Promise<ConsultationEntry[]> {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'consultations.json')
   try {
@@ -47,14 +48,14 @@ async function readLocalConsultations(): Promise<any[]> {
   }
 }
 
-async function writeLocalConsultations(data: any[]) {
+async function writeLocalConsultations(data: ConsultationEntry[]) {
   const dataDir = path.join(process.cwd(), 'data')
   const filePath = path.join(dataDir, 'consultations.json')
   await fs.mkdir(dataDir, { recursive: true })
   await fs.writeFile(filePath, JSON.stringify(data, null, 2), 'utf8')
 }
 
-export async function GET(req: NextRequest) {
+export async function GET() {
   try {
     if (hasFirebaseConfig()) {
       try {
@@ -94,11 +95,11 @@ export async function POST(req: NextRequest) {
     }
 
     // Read existing invoices to check length/generate auto invoice number
-    let existingInvoices: any[] = []
+    let existingInvoices: Invoice[] = []
     if (hasFirebaseConfig()) {
       try {
         const snap = await getDocs(collection(db, 'invoices'))
-        existingInvoices = snap.docs.map(d => d.data())
+        existingInvoices = snap.docs.map(d => ({ id: d.id, ...d.data() } as Invoice))
       } catch {}
     } else {
       existingInvoices = await readLocalInvoices()
@@ -113,7 +114,7 @@ export async function POST(req: NextRequest) {
     let taxableSubtotal = 0
     let totalCOGS = 0
 
-    const processedItems = invoice.items.map((item: any) => {
+    const processedItems = invoice.items.map((item: InvoiceItem) => {
       const qty = Number(item.qty) || 0
       const costPrice = Number(item.costPrice) || 0
       const rate = Number(item.rate) || 0
@@ -156,7 +157,7 @@ export async function POST(req: NextRequest) {
     let totalCgst = 0
     let totalSgst = 0
     
-    processedItems.forEach((item: any) => {
+    processedItems.forEach((item: InvoiceItem) => {
       // Proportional factor
       const proportion = taxableSubtotal > 0 ? item.amount / taxableSubtotal : 0
       const itemDiscount = discountAmount * proportion

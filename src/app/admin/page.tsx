@@ -7,9 +7,7 @@ import {
   Printer,
   TrendingUp,
   DollarSign,
-  AlertCircle,
   Calendar,
-  MapPin,
   User,
   Phone,
   Layers,
@@ -19,16 +17,13 @@ import {
   RefreshCw,
   Search,
   Check,
-  CheckCircle2,
   X,
   PlusCircle,
   ClipboardList,
-  ChevronRight,
-  TrendingDown,
   Info,
   FileCode
 } from 'lucide-react'
-import AdminImportPage from './import/page'
+import { AdminImport } from '../../components/AdminImport'
 
 type Tab = 'leads' | 'catalog' | 'invoices' | 'reports' | 'import' | 'quotations'
 
@@ -228,6 +223,7 @@ export default function AdminDashboard() {
     if (savedPin) {
       verifyPin(savedPin)
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function verifyPin(enteredPin: string) {
@@ -332,7 +328,7 @@ export default function AdminDashboard() {
   }
 
   // ── Stage & Pipeline Transition Operations ────────────────────────────────
-  async function advanceLeadStage(leadId: string | number, currentStage: PipelineStage, extraPayload: any = {}) {
+  async function advanceLeadStage(leadId: string | number, currentStage: PipelineStage, extraPayload: Record<string, unknown> = {}) {
     const idx = STAGES.findIndex(s => s.value === currentStage)
     if (idx === -1 || idx === STAGES.length - 1) return
 
@@ -362,36 +358,7 @@ export default function AdminDashboard() {
     }
   }
 
-  async function updateProjectDetailsField(leadId: string | number, updatedProjectDetails: ProjectDetails) {
-    try {
-      const currentLead = leads.find(l => String(l.id) === String(leadId))
-      const mergedDetails = {
-        ...(currentLead?.projectDetails || {}),
-        ...updatedProjectDetails
-      }
 
-      const res = await fetch('/api/consultation', {
-        method: 'PATCH',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          leadId,
-          projectDetails: mergedDetails
-        })
-      })
-
-      if (res.ok) {
-        loadLeads()
-        if (selectedLeadDetails && selectedLeadDetails.id === leadId) {
-          setSelectedLeadDetails(prev => prev ? { ...prev, projectDetails: mergedDetails } : null)
-        }
-        alert('Details updated successfully!')
-      } else {
-        alert('Failed to save details.')
-      }
-    } catch (err) {
-      alert('Error: ' + err)
-    }
-  }
 
   // ── Scheduling Visit Form ────────────────────────────────────────────────
   async function submitInspection(e: React.FormEvent) {
@@ -450,7 +417,7 @@ export default function AdminDashboard() {
     setBillingItems(initialItems)
   }
 
-  function handleBillingItemChange(index: number, field: keyof InvoiceItem, value: any) {
+  function handleBillingItemChange(index: number, field: keyof InvoiceItem, value: string | number) {
     const updated = [...billingItems]
     updated[index] = { ...updated[index], [field]: value }
     setBillingItems(updated)
@@ -546,7 +513,7 @@ export default function AdminDashboard() {
     const b = ['', '', 'Twenty', 'Thirty', 'Forty', 'Fifty', 'Sixty', 'Seventy', 'Eighty', 'Ninety']
 
     if (num === 0) return 'Zero'
-    let n = String(num).padStart(9, '0')
+    const n = String(num).padStart(9, '0')
     const match = n.match(/^(\d{2})(\d{2})(\d{2})(\d{1})(\d{2})$/)
     if (!match) return ''
 
@@ -894,7 +861,7 @@ export default function AdminDashboard() {
     <main className="min-h-screen bg-gray-50 flex flex-col font-sans">
       {/* Top Navbar */}
       <header className="bg-gradient-to-r from-green-700 to-green-600 shadow-lg text-white sticky top-0 z-30">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+        <div className="max-w-7xl mx-auto px-4 py-4 flex flex-col sm:flex-row justify-between items-center gap-4 text-center sm:text-left">
           <div className="flex items-center gap-3">
             <span className="text-3xl">🌞</span>
             <div>
@@ -902,7 +869,7 @@ export default function AdminDashboard() {
               <p className="text-xs text-green-100 font-medium">Business Admin & Billing Control Center</p>
             </div>
           </div>
-          <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-center gap-3">
             <span className="text-xs bg-green-800 px-3 py-1.5 rounded-full border border-green-500 flex items-center gap-1 font-semibold">
               <span className="w-2 h-2 rounded-full bg-green-400 animate-pulse"></span>
               Live Firebase Mode
@@ -1093,7 +1060,7 @@ export default function AdminDashboard() {
 
               {/* Detail drawer column */}
               {selectedLeadDetails && (
-                <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-6 space-y-6 sticky top-[150px]">
+                <div className="bg-white rounded-xl border border-gray-200 shadow-lg p-6 space-y-6 lg:sticky lg:top-[150px]">
                   <div className="flex justify-between items-center border-b border-gray-100 pb-3">
                     <div>
                       <h3 className="font-bold text-lg text-gray-900 font-sans">Project Specs</h3>
@@ -1516,10 +1483,10 @@ export default function AdminDashboard() {
                 <p className="text-gray-500 text-sm">Track your margins, vendor costs, and project pipelines with real-time analytics.</p>
               </div>
               <div className="flex bg-gray-100 p-1 rounded-xl">
-                {['monthly', 'quarterly', 'yearly'].map(t => (
+                {(['monthly', 'quarterly', 'yearly'] as const).map(t => (
                   <button
                     key={t}
-                    onClick={() => setReportTimeframe(t as any)}
+                    onClick={() => setReportTimeframe(t)}
                     className={`px-4 py-2 rounded-lg text-xs font-bold transition capitalize ${
                       reportTimeframe === t ? 'bg-white shadow text-green-700' : 'text-gray-500 hover:text-gray-900'
                     }`}
@@ -1700,7 +1667,7 @@ export default function AdminDashboard() {
         {/* CMS EXCEL IMPORT TAB */}
         {activeTab === 'import' && (
           <section className="bg-white p-6 rounded-xl border border-gray-200 shadow-sm">
-            <AdminImportPage />
+            <AdminImport adminPin={pin} isTab={true} />
           </section>
         )}
       </div>
@@ -2038,7 +2005,7 @@ export default function AdminDashboard() {
                       <tr className="bg-gray-100 text-left text-xs font-bold text-gray-500 uppercase border-b border-gray-200">
                         <th className="p-3 w-1/3">Catalog Template / Product Description</th>
                         <th className="p-3 w-1/3">Model / Rating specifications</th>
-                        <th className="p-3 w-1/4">Quantity (Number or Terms e.g. "USE")</th>
+                        <th className="p-3 w-1/4">Quantity (Number or Terms e.g. &quot;USE&quot;)</th>
                         <th className="p-3 w-12"></th>
                       </tr>
                     </thead>

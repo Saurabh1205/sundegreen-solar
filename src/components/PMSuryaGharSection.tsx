@@ -1,5 +1,5 @@
 'use client'
-import { Zap, PiggyBank, ArrowRight, ShieldCheck } from 'lucide-react'
+import { ArrowRight, ShieldCheck } from 'lucide-react'
 import Link from 'next/link'
 
 export default function PMSuryaGharSection() {

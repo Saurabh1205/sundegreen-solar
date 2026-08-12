@@ -10,7 +10,7 @@ export default function ContactForm() {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
     if (!name || !email || !phone || !message) {
       setError('Please fill in all fields.')
@@ -20,16 +20,37 @@ export default function ContactForm() {
     setSending(true)
     setError('')
 
-    // Simulate sending message
-    setTimeout(() => {
+    try {
+      const res = await fetch('/api/consultation', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          name,
+          whatsapp: phone,
+          email,
+          message,
+          source: 'Contact Page'
+        })
+      })
+
+      if (res.ok) {
+        setSuccess(true)
+        setName('')
+        setEmail('')
+        setPhone('')
+        setMessage('')
+        setTimeout(() => setSuccess(false), 5000)
+      } else {
+        const data = await res.json()
+        setError(data.error || 'Failed to send message. Please try again.')
+      }
+    } catch (err) {
+      setError('An error occurred. Please check your connection and try again.')
+    } finally {
       setSending(false)
-      setSuccess(true)
-      setName('')
-      setEmail('')
-      setPhone('')
-      setMessage('')
-      setTimeout(() => setSuccess(false), 5000)
-    }, 1500)
+    }
   }
 
   return (
