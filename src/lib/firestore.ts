@@ -74,6 +74,20 @@ const fallbackBlogPosts: BlogPost[] = [
   { slug: 'net-metering-explained', title: 'Net Metering Explained', excerpt: 'Net metering basics for homeowners.', publishedAt: '2024-03-05' },
 ]
 
+// ─── LOCAL FILE FALLBACK HELPER ─────────────────────────────────────────────
+
+async function readLocalJson<T>(filename: string): Promise<T | null> {
+  try {
+    const { promises: fs } = await import('fs')
+    const path = await import('path')
+    const filePath = path.join(process.cwd(), 'data', filename)
+    const raw = await fs.readFile(filePath, 'utf8')
+    return JSON.parse(raw) as T
+  } catch {
+    return null
+  }
+}
+
 // ─── FETCH FUNCTIONS ─────────────────────────────────────────────────────────
 
 export async function getSiteConfig(): Promise<SiteConfig> {
@@ -83,60 +97,72 @@ export async function getSiteConfig(): Promise<SiteConfig> {
     if (snap.exists()) {
       return { ...fallbackSiteConfig, ...snap.data() } as SiteConfig
     }
-    return fallbackSiteConfig
-  } catch {
-    return fallbackSiteConfig
+  } catch {}
+  const local = await readLocalJson<Partial<SiteConfig>>('siteConfig.json')
+  if (local) {
+    return { ...fallbackSiteConfig, ...local }
   }
+  return fallbackSiteConfig
 }
 
 export async function getServices(): Promise<Service[]> {
   try {
     const snap = await getDocs(collection(db, 'services'))
-    if (snap.empty) return fallbackServices
-    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Service))
-  } catch {
-    return fallbackServices
-  }
+    if (!snap.empty) {
+      return snap.docs.map(d => ({ id: d.id, ...d.data() } as Service))
+    }
+  } catch {}
+  const local = await readLocalJson<Service[]>('services.json')
+  if (local && local.length > 0) return local
+  return fallbackServices
 }
 
 export async function getProjects(): Promise<Project[]> {
   try {
     const snap = await getDocs(collection(db, 'projects'))
-    if (snap.empty) return fallbackProjects
-    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Project))
-  } catch {
-    return fallbackProjects
-  }
+    if (!snap.empty) {
+      return snap.docs.map(d => ({ id: d.id, ...d.data() } as Project))
+    }
+  } catch {}
+  const local = await readLocalJson<Project[]>('projects.json')
+  if (local && local.length > 0) return local
+  return fallbackProjects
 }
 
 export async function getTestimonials(): Promise<Testimonial[]> {
   try {
     const snap = await getDocs(collection(db, 'testimonials'))
-    if (snap.empty) return fallbackTestimonials
-    return snap.docs.map(d => ({ id: d.id, ...d.data() } as Testimonial))
-  } catch {
-    return fallbackTestimonials
-  }
+    if (!snap.empty) {
+      return snap.docs.map(d => ({ id: d.id, ...d.data() } as Testimonial))
+    }
+  } catch {}
+  const local = await readLocalJson<Testimonial[]>('testimonials.json')
+  if (local && local.length > 0) return local
+  return fallbackTestimonials
 }
 
 export async function getFAQs(): Promise<FAQItem[]> {
   try {
     const q = query(collection(db, 'faqs'), orderBy('order', 'asc'))
     const snap = await getDocs(q)
-    if (snap.empty) return fallbackFAQs
-    return snap.docs.map(d => ({ id: d.id, ...d.data() } as FAQItem))
-  } catch {
-    return fallbackFAQs
-  }
+    if (!snap.empty) {
+      return snap.docs.map(d => ({ id: d.id, ...d.data() } as FAQItem))
+    }
+  } catch {}
+  const local = await readLocalJson<FAQItem[]>('faqs.json')
+  if (local && local.length > 0) return local
+  return fallbackFAQs
 }
 
 export async function getBlogPosts(): Promise<BlogPost[]> {
   try {
     const q = query(collection(db, 'blogPosts'), orderBy('publishedAt', 'desc'))
     const snap = await getDocs(q)
-    if (snap.empty) return fallbackBlogPosts
-    return snap.docs.map(d => ({ slug: d.id, ...d.data() } as BlogPost))
-  } catch {
-    return fallbackBlogPosts
-  }
+    if (!snap.empty) {
+      return snap.docs.map(d => ({ slug: d.id, ...d.data() } as BlogPost))
+    }
+  } catch {}
+  const local = await readLocalJson<BlogPost[]>('blogPosts.json')
+  if (local && local.length > 0) return local
+  return fallbackBlogPosts
 }
