@@ -1,5 +1,37 @@
 {
-  "phone": "+91 99999 88888",
-  "email": "contact@sundegreen.com",
-  "address": "New Delhi, India"
+  "heroHeadline": "Power Your Future With Clean Solar Energy",
+  "heroSubline": "Reduce electricity bills by up to 90% with high-efficiency solar systems for homes, businesses and industries.",
+  "heroBadgeText": "India's Trusted Solar Partner",
+  "logoUrl": "",
+  "phone": "+91 75077 71361",
+  "email": "info@sundegreensolar.in",
+  "address": "Nagpur, India",
+  "googleRating": "4.8",
+  "footerTagline": "Empowering India with clean, sustainable solar energy solutions for homes, businesses, and industries.",
+  "stats": [
+    {
+      "icon": "⚡",
+      "value": 500,
+      "suffix": "+",
+      "label": "Installations"
+    },
+    {
+      "icon": "🔋",
+      "value": 10,
+      "suffix": "+",
+      "label": "MW Installed"
+    },
+    {
+      "icon": "🛡️",
+      "value": 25,
+      "suffix": "",
+      "label": "Years Warranty"
+    },
+    {
+      "icon": "😊",
+      "value": 98,
+      "suffix": "%",
+      "label": "Customer Satisfaction"
+    }
+  ]
 }

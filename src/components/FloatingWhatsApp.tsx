@@ -41,7 +41,7 @@ export default function FloatingWhatsApp() {
 
   if (!isVisible) return null
 
-  const whatsappNumber = "919876543210" // Using office phone number format
+  const whatsappNumber = "917507771361" // Company office mobile number
   const href = `https://wa.me/${whatsappNumber}?text=${quoteDetails || encodeURIComponent("Hi, I want to talk to a solar expert.")}`
 
   return (
