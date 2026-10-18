@@ -806,5 +806,26 @@
     "installedAt": null,
     "projectDetails": null,
     "createdAt": "2026-08-14T21:27:18.350Z"
+  },
+  {
+    "id": 1792337760401,
+    "name": "sajhsj fadf",
+    "whatsapp": "8007180374",
+    "email": null,
+    "pincode": "440032",
+    "bill": "₹1500 - ₹2500",
+    "serviceType": null,
+    "message": null,
+    "suggestedKw": null,
+    "brand": null,
+    "quotePrice": null,
+    "leadPriority": "Low Priority",
+    "source": "Direct",
+    "inspectionDetails": null,
+    "status": "Pending",
+    "invoiceNo": null,
+    "installedAt": null,
+    "projectDetails": null,
+    "createdAt": "2026-10-18T15:35:57.421Z"
   }
 ]
