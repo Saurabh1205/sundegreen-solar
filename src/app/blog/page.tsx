@@ -5,8 +5,9 @@ import { getBlogPosts } from '../../lib/firestore'
 export const revalidate = 60 // revalidate every 60 seconds
 
 export const metadata = {
-  title: 'Blog - Sun Degreen Solar',
-  description: 'Insights and guides on solar energy and incentives in India.'
+  title: 'Solar Energy Guides, PM Surya Ghar News & Subsidy Insights',
+  description:
+    'Stay updated with expert rooftop solar guides, PM Surya Ghar Muft Bijli Yojana subsidy policies, net metering regulations, and solar panel comparisons in India.'
 }
 
 export default async function BlogPage() {

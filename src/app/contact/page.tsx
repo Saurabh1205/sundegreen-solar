@@ -2,8 +2,9 @@ import ContactForm from '../../components/ContactForm'
 import { getSiteConfig } from '../../lib/firestore'
 
 export const metadata = {
-  title: 'Contact Us - Sun Degreen Solar',
-  description: 'Get in touch for a free solar consultation and quote.'
+  title: 'Contact Sun Degreen Solar | Book Free Rooftop Solar Survey in Nagpur',
+  description:
+    'Connect with Sun Degreen Solar experts. Call +91 75077 71361 or visit us in Nagpur, Maharashtra for customized solar quotes, DISCOM approvals, and free site surveys.'
 }
 
 export default async function ContactPage(){

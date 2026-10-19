@@ -1,8 +1,9 @@
 import CalculatorSection from '../../components/CalculatorSection'
 
 export const metadata = {
-  title: 'Solar Savings Calculator - Sun Degreen Solar',
-  description: 'Estimate system size, savings and ROI for rooftop solar.'
+  title: 'Solar Rooftop Calculator & PM Surya Ghar Subsidy Estimator India',
+  description:
+    'Calculate your rooftop solar capacity, monthly electricity bill savings, payback period, and PM Surya Ghar subsidy (up to ₹78,000) instantly with Sun Degreen Solar.'
 }
 
 export default function CalculatorPage(){

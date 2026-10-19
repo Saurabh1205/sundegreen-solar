@@ -1,4 +1,7 @@
 User-agent: *
-Disallow:
+Allow: /
+Disallow: /admin
+Disallow: /api/
 
-Sitemap: /sitemap.xml
+Sitemap: https://www.sundegreensolar.in/sitemap.xml
+Host: https://www.sundegreensolar.in

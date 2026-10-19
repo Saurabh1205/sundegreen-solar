@@ -2,8 +2,9 @@ import WhyChooseUs from '../../components/WhyChooseUs'
 import FAQSection from '../../components/FAQSection'
 
 export const metadata = {
-  title: 'About Us - Sun Degreen Solar',
-  description: 'Learn about our mission, team and certifications.'
+  title: 'About Sun Degreen Solar | Trusted Solar EPC Company in Maharashtra',
+  description:
+    'Discover Sun Degreen Solar – Maharashtra\'s trusted solar engineering, procurement, and construction (EPC) partner. 25-year warranty, certified engineers, and 500+ successful installations.'
 }
 
 export default function AboutPage(){
