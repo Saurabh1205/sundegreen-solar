@@ -374,21 +374,21 @@ export default function FloatingWhatsApp() {
               />
             </div>
 
-            {/* Send Button (Teal Green circle with paper airplane icon) */}
+            {/* Send Button (Official WhatsApp Send Icon, Optically Centered) */}
             <button
               onClick={() => handleSendMessage()}
               disabled={!message.trim()}
               className={`w-10 h-10 rounded-full flex items-center justify-center shadow-md transition-all transform active:scale-90 flex-shrink-0 ${
                 message.trim()
-                  ? 'bg-[#128C7E] hover:bg-[#075E54] text-white hover:scale-105'
-                  : 'bg-[#128C7E]/70 text-white/90 cursor-not-allowed'
+                  ? 'bg-[#00a884] hover:bg-[#008f6f] text-white hover:scale-105'
+                  : 'bg-[#00a884]/60 text-white/80 cursor-not-allowed'
               }`}
               title="Send Message"
               aria-label="Send message"
             >
-              {/* Paper airplane send icon matching reference image */}
-              <svg className="w-5 h-5 fill-current transform rotate-45 -translate-y-0.5 -translate-x-0.5" viewBox="0 0 24 24">
-                <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z" />
+              {/* Authentic WhatsApp horizontal send arrow, optically centered */}
+              <svg className="w-[19px] h-[19px] fill-current translate-x-[1.5px]" viewBox="0 0 24 24">
+                <path d="M1.101 21.757L23.8 12.028 1.101 2.3l.011 7.912 13.623 1.816-13.623 1.817-.011 7.912z" />
               </svg>
             </button>
           </div>
