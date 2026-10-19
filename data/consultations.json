@@ -848,5 +848,26 @@
     "installedAt": null,
     "projectDetails": null,
     "createdAt": "2026-10-19T09:41:48.605Z"
+  },
+  {
+    "id": 1792406290068,
+    "name": "Tarun Manikpuri",
+    "whatsapp": "7583007666",
+    "email": null,
+    "pincode": "495001",
+    "bill": "₹1500 - ₹2500",
+    "serviceType": "Residential Solar",
+    "message": null,
+    "suggestedKw": null,
+    "brand": null,
+    "quotePrice": null,
+    "leadPriority": "Low Priority",
+    "source": "Local Verification",
+    "inspectionDetails": null,
+    "status": "Pending",
+    "invoiceNo": null,
+    "installedAt": null,
+    "projectDetails": null,
+    "createdAt": "2026-10-19T10:38:09.702Z"
   }
 ]

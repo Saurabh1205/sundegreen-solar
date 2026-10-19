@@ -28,25 +28,11 @@ export default function Hero(){
       })
       if (!res.ok) throw new Error('Failed to submit')
       setSuccess(true)
-
-      const cleanPhone = whatsapp.replace(/\D/g, '')
-      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
-      const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Your rooftop solar enquiry has been received:\n• Customer Name: ${name}\n• PIN Code: ${pincode}\n• Monthly Bill: ₹${bill}\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
-      
-      const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`
-      setTimeout(() => {
-        try {
-          window.open(waUrl, '_blank')
-        } catch (e) {
-          // ignore
-        }
-      }, 600)
-
       setName('')
       setWhatsapp('')
       setPincode('')
       setBill('')
-      setTimeout(() => setSuccess(false), 6000)
+      setTimeout(() => setSuccess(false), 8000)
     }catch(err: unknown){
       const errMsg = err instanceof Error ? err.message : 'Submission failed'
       setError(errMsg)
@@ -231,8 +217,12 @@ export default function Hero(){
                     </div>
                   )}
                   {success && (
-                    <div className="p-3 bg-green-50 text-green-700 rounded-lg text-sm border border-green-200">
-                      ✓ Thanks! We&apos;ll contact you shortly.
+                    <div className="p-3 bg-emerald-50 text-emerald-800 rounded-lg text-sm border border-emerald-300 shadow-sm flex items-start gap-2">
+                      <span className="text-emerald-600 font-bold text-base">✓</span>
+                      <div>
+                        <p className="font-semibold text-emerald-900">Enquiry Submitted Successfully!</p>
+                        <p className="text-xs text-emerald-700 mt-0.5">Thank you! Our solar team has received your details and will call you on WhatsApp shortly.</p>
+                      </div>
                     </div>
                   )}
 

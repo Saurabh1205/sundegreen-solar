@@ -82,11 +82,13 @@ Thank you for reaching out. Here is your customized rooftop solar estimate:
 • Priority Level: ${entry.leadPriority}
 • Lead Source: ${entry.source}`
 
+  const isConfigured = (v?: string) => !!v && !v.includes('your_') && !v.includes('placeholder')
+
   // 1. Meta WhatsApp Business Cloud API Integration
   const cloudToken = process.env.WHATSAPP_CLOUD_API_TOKEN
   const phoneId = process.env.WHATSAPP_PHONE_NUMBER_ID
 
-  if (cloudToken && phoneId) {
+  if (isConfigured(cloudToken) && isConfigured(phoneId)) {
     try {
       // Send auto-reply to customer
       await fetch(`https://graph.facebook.com/v18.0/${phoneId}/messages`, {
@@ -107,23 +109,30 @@ Thank you for reaching out. Here is your customized rooftop solar estimate:
     }
   }
 
-  // 2. Custom WhatsApp Gateway (Twilio / Interakt / Wati / UltraMsg)
-  const gatewayUrl = process.env.WHATSAPP_GATEWAY_URL
+  // 2. CallMeBot Free Direct WhatsApp Alert to Company Admin (+91 75077 71361)
+  const callmebotKey = process.env.CALLMEBOT_API_KEY
+  if (isConfigured(callmebotKey)) {
+    try {
+      const callmebotUrl = `https://api.callmebot.com/whatsapp.php?phone=${COMPANY_PHONE}&text=${encodeURIComponent(ownerAlertMessage)}&apikey=${callmebotKey}`
+      await fetch(callmebotUrl)
+      console.log(`[AUTO-WHATSAPP] Direct owner WhatsApp alert dispatched to +${COMPANY_PHONE} via CallMeBot`)
+    } catch (err) {
+      console.warn('[AUTO-WHATSAPP] CallMeBot dispatch failed:', err)
+    }
+  }
+
+  // 3. Custom WhatsApp Gateway / Webhook (Twilio / Interakt / Wati / UltraMsg / Zapier)
+  const gatewayUrl = process.env.WHATSAPP_GATEWAY_URL || process.env.ADMIN_ALERT_WEBHOOK_URL
   const gatewayToken = process.env.WHATSAPP_GATEWAY_TOKEN
 
-  if (gatewayUrl) {
+  if (isConfigured(gatewayUrl)) {
     try {
-      await fetch(gatewayUrl, {
+      await fetch(gatewayUrl!, {
         method: 'POST',
         headers: { 'Authorization': `Bearer ${gatewayToken || ''}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ to: formattedPhone, message: messageText, data: entry })
+        body: JSON.stringify({ to: COMPANY_PHONE, recipient: COMPANY_PHONE, message: ownerAlertMessage, customerPhone: formattedPhone, data: entry })
       })
-      await fetch(gatewayUrl, {
-        method: 'POST',
-        headers: { 'Authorization': `Bearer ${gatewayToken || ''}`, 'Content-Type': 'application/json' },
-        body: JSON.stringify({ to: COMPANY_PHONE, message: ownerAlertMessage, data: entry })
-      })
-      console.log(`[AUTO-WHATSAPP] Gateway messages dispatched to customer +${formattedPhone} and company +${COMPANY_PHONE}`)
+      console.log(`[AUTO-WHATSAPP] Gateway lead alert dispatched to company +${COMPANY_PHONE}`)
       return { status: 'sent', provider: 'CustomGateway', customerRecipient: formattedPhone, companyRecipient: COMPANY_PHONE }
     } catch (err) {
       console.warn('[AUTO-WHATSAPP] Custom Gateway call failed:', err)

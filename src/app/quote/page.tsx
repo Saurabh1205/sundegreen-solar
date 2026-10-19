@@ -135,20 +135,6 @@ export default function QuotePage() {
 
       setSuccess(true)
       setShowSuccessPopup(true)
-
-      // Automatically launch WhatsApp without requiring user to click anywhere
-      const cleanPhone = whatsapp.replace(/\D/g, '')
-      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
-      const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Here is your customized rooftop solar estimate:\n\n📋 YOUR SOLAR PACKAGE DETAILS:\n• Customer Name: ${name}\n• Contact Number: ${whatsapp}\n• Service Requested: ${serviceType}\n• Monthly Bill: ₹${bill}\n• Suggested System Size: ${suggestedKw} kW (${brand})\n• Estimated Net Price: ₹${quotePrice.toLocaleString()}\n• Lead Priority: ${leadPriority}\n\n💰 GOVT SUBSIDY BENEFIT (PM Surya Ghar):\n• Up to ₹78,000 Subsidy Available!\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
-
-      const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`
-      setTimeout(() => {
-        try {
-          window.open(waUrl, '_blank')
-        } catch (e) {
-          // ignore popup blocks
-        }
-      }, 600)
     } catch (err: unknown) {
       const errMsg = err instanceof Error ? err.message : 'Submission failed'
       setError(errMsg)
@@ -782,14 +768,12 @@ I'd like to proceed with booking a site survey.`
             <div className="flex flex-col gap-2.5">
               <button
                 onClick={() => {
-                  const cleanPhone = whatsapp.replace(/\D/g, '')
-                  const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
-                  const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Here is your customized rooftop solar estimate:\n\n📋 YOUR SOLAR PACKAGE DETAILS:\n• Customer Name: ${name}\n• Contact Number: ${whatsapp}\n• Service Requested: ${serviceType}\n• Monthly Bill: ₹${bill}\n• Suggested System Size: ${calculatedQuote.suggestedKw} kW (${calculatedQuote.brand})\n• Estimated Net Price: ₹${calculatedQuote.quotePrice.toLocaleString()}\n• Lead Priority: ${calculatedQuote.leadPriority}\n\n💰 GOVT SUBSIDY BENEFIT (PM Surya Ghar):\n• Up to ₹78,000 Subsidy Available!\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
-                  window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`, '_blank')
+                  const companyText = `Hello Sun Degreen Solar! I just calculated my solar rooftop quote for ${name} (${serviceType}, Bill: ₹${bill}, System: ${calculatedQuote.suggestedKw} kW). Please share subsidy & installation details.`
+                  window.open(`https://wa.me/917507771361?text=${encodeURIComponent(companyText)}`, '_blank')
                 }}
                 className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2"
               >
-                <span>💬</span> Re-open WhatsApp Message
+                <span>💬</span> Chat with Official Solar Helpline (+91 75077 71361)
               </button>
 
               <button
