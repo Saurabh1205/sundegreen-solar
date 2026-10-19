@@ -111,11 +111,22 @@ Thank you for reaching out. Here is your customized rooftop solar estimate:
 
   // 2. CallMeBot Free Direct WhatsApp Alert to Company Admin (+91 75077 71361)
   const callmebotKey = process.env.CALLMEBOT_API_KEY
+  const callmebotPhone = process.env.CALLMEBOT_PHONE || COMPANY_PHONE
   if (isConfigured(callmebotKey)) {
     try {
-      const callmebotUrl = `https://api.callmebot.com/whatsapp.php?phone=${COMPANY_PHONE}&text=${encodeURIComponent(ownerAlertMessage)}&apikey=${callmebotKey}`
-      await fetch(callmebotUrl)
-      console.log(`[AUTO-WHATSAPP] Direct owner WhatsApp alert dispatched to +${COMPANY_PHONE} via CallMeBot`)
+      const cleanAdminPhone = callmebotPhone.replace(/\D/g, '')
+      const callmebotUrl = `https://api.callmebot.com/whatsapp.php?phone=+${cleanAdminPhone}&text=${encodeURIComponent(ownerAlertMessage)}&apikey=${callmebotKey.trim()}`
+      const botRes = await fetch(callmebotUrl)
+      const botText = await botRes.text()
+      console.log(`[AUTO-WHATSAPP] Direct owner WhatsApp alert dispatched to +${cleanAdminPhone} via CallMeBot (Status: ${botRes.status}, Response: ${botText.substring(0, 100)})`)
+      return {
+        status: 'sent',
+        provider: 'CallMeBot',
+        customerRecipient: formattedPhone,
+        companyRecipient: cleanAdminPhone,
+        customerMessage: messageText,
+        ownerAlertMessage
+      }
     } catch (err) {
       console.warn('[AUTO-WHATSAPP] CallMeBot dispatch failed:', err)
     }
