@@ -14,6 +14,7 @@ export default function QuotePage() {
   const [message, setMessage] = useState('')
   const [sending, setSending] = useState(false)
   const [success, setSuccess] = useState(false)
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false)
   const [error, setError] = useState('')
   const [leadId, setLeadId] = useState<string | number | null>(null)
 
@@ -133,6 +134,21 @@ export default function QuotePage() {
       window.dispatchEvent(new Event('quote_generated'))
 
       setSuccess(true)
+      setShowSuccessPopup(true)
+
+      // Automatically launch WhatsApp without requiring user to click anywhere
+      const cleanPhone = whatsapp.replace(/\D/g, '')
+      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
+      const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Here is your customized rooftop solar estimate:\n\n📋 YOUR SOLAR PACKAGE DETAILS:\n• Customer Name: ${name}\n• Contact Number: ${whatsapp}\n• Service Requested: ${serviceType}\n• Monthly Bill: ₹${bill}\n• Suggested System Size: ${suggestedKw} kW (${brand})\n• Estimated Net Price: ₹${quotePrice.toLocaleString()}\n• Lead Priority: ${leadPriority}\n\n💰 GOVT SUBSIDY BENEFIT (PM Surya Ghar):\n• Up to ₹78,000 Subsidy Available!\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
+      
+      const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`
+      setTimeout(() => {
+        try {
+          window.open(waUrl, '_blank')
+        } catch (e) {
+          // ignore popup blocks
+        }
+      }, 600)
     } catch (err: unknown) {
       const errMsg = err instanceof Error ? err.message : 'Submission failed'
       setError(errMsg)
@@ -208,7 +224,7 @@ export default function QuotePage() {
 - Lead Scoring Priority: ${calculatedQuote.leadPriority}
 
 I'd like to proceed with booking a site survey.`
-    return `https://wa.me/919876543210?text=${encodeURIComponent(text)}`
+    return `https://wa.me/917507771361?text=${encodeURIComponent(text)}`
   }
 
   // PDF Print Trigger
@@ -734,6 +750,62 @@ I'd like to proceed with booking a site survey.`
           )}
         </div>
       </div>
+
+      {/* AUTOMATIC SUCCESS POPUP MODAL */}
+      {showSuccessPopup && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm animate-fade-in">
+          <div className="bg-white rounded-3xl max-w-md w-full p-6 sm:p-8 shadow-2xl border border-green-100 text-center relative overflow-hidden transform animate-scale-up">
+            <div className="w-16 h-16 bg-green-100 text-green-600 rounded-full flex items-center justify-center mx-auto mb-4 text-3xl font-extrabold shadow-inner">
+              ✓
+            </div>
+            <span className="inline-block px-3 py-1 bg-green-50 text-green-700 text-xs font-bold rounded-full mb-3 border border-green-200">
+              ⚡ WhatsApp Auto-Dispatched
+            </span>
+            <h3 className="text-2xl font-black text-gray-900 mb-2">Quote Sent to WhatsApp!</h3>
+            <p className="text-sm text-gray-600 mb-6 leading-relaxed">
+              Your customized solar quote has been automatically generated and sent to your WhatsApp number:
+              <strong className="block text-green-700 text-base mt-1">+91 {whatsapp}</strong>
+            </p>
+
+            {/* Quote details summary */}
+            <div className="bg-slate-50 border border-slate-100 rounded-2xl p-4 text-left space-y-2 mb-6 text-xs text-gray-700">
+              <div className="flex justify-between">
+                <span className="text-gray-500">Customer:</span>
+                <span className="font-bold text-gray-900">{name}</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-500">System Size:</span>
+                <span className="font-bold text-gray-900">{calculatedQuote.suggestedKw} kW ({calculatedQuote.brand})</span>
+              </div>
+              <div className="flex justify-between">
+                <span className="text-gray-500">Net Estimated Price:</span>
+                <span className="font-bold text-green-600 text-sm">₹{calculatedQuote.quotePrice.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div className="flex flex-col gap-2.5">
+              <button
+                onClick={() => {
+                  const cleanPhone = whatsapp.replace(/\D/g, '')
+                  const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
+                  const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Here is your customized rooftop solar estimate:\n\n📋 YOUR SOLAR PACKAGE DETAILS:\n• Customer Name: ${name}\n• Contact Number: ${whatsapp}\n• Service Requested: ${serviceType}\n• Monthly Bill: ₹${bill}\n• Suggested System Size: ${calculatedQuote.suggestedKw} kW (${calculatedQuote.brand})\n• Estimated Net Price: ₹${calculatedQuote.quotePrice.toLocaleString()}\n• Lead Priority: ${calculatedQuote.leadPriority}\n\n💰 GOVT SUBSIDY BENEFIT (PM Surya Ghar):\n• Up to ₹78,000 Subsidy Available!\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
+                  window.open(`https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`, '_blank')
+                }}
+                className="w-full bg-emerald-500 hover:bg-emerald-600 text-white font-bold py-3 px-4 rounded-xl text-sm transition shadow-lg flex items-center justify-center gap-2"
+              >
+                <span>💬</span> Re-open WhatsApp Message
+              </button>
+
+              <button
+                onClick={() => setShowSuccessPopup(false)}
+                className="w-full bg-slate-100 hover:bg-slate-200 text-gray-700 font-semibold py-2.5 px-4 rounded-xl text-xs transition"
+              >
+                View Full Breakdown On Screen
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </main>
   )
 }

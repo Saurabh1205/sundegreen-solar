@@ -266,7 +266,7 @@ export function AdminImport({ adminPin, isTab = false }: { adminPin?: string; is
             disabled={importing}
             className="w-full bg-green-600 hover:bg-green-700 disabled:opacity-50 text-white font-bold py-4 rounded-xl text-lg transition-all duration-200 hover:scale-[1.01] shadow-lg"
           >
-            {importing ? '⏳ Importing to Firebase...' : '🚀 Import to Firebase'}
+            {importing ? '⏳ Importing Content...' : '🚀 Import Content'}
           </button>
         </div>
       )}

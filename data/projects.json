@@ -1,0 +1,29 @@
+[
+  {
+    "id": "p1",
+    "title": "Rooftop Residence, Pune",
+    "location": "Pune, MH",
+    "capacityKW": 5,
+    "savingsAnnual": 45000,
+    "category": "residential",
+    "image": "/projects/res1.svg"
+  },
+  {
+    "id": "p2",
+    "title": "Factory Solar Installation, Gujarat",
+    "location": "Vadodara, GJ",
+    "capacityKW": 150,
+    "savingsAnnual": 1800000,
+    "category": "industrial",
+    "image": "/projects/res1.svg"
+  },
+  {
+    "id": "p3",
+    "title": "School Rooftop, Bangalore",
+    "location": "Bengaluru, KA",
+    "capacityKW": 20,
+    "savingsAnnual": 200000,
+    "category": "commercial",
+    "image": "/projects/res1.svg"
+  }
+]

@@ -1,0 +1,26 @@
+[
+  {
+    "id": "1",
+    "name": "Rajesh Kumar",
+    "location": "Mumbai, Maharashtra",
+    "rating": 5,
+    "review": "Sun Degreen Solar transformed my electricity bills. I am saving ₹4,500 every month! The installation was quick and the team was very professional.",
+    "image": "/customer_rajesh.png"
+  },
+  {
+    "id": "2",
+    "name": "Priya Sharma",
+    "location": "Bangalore, Karnataka",
+    "rating": 5,
+    "review": "The best investment for my home. The engineers explained everything clearly, and now I feel proud using clean energy. Highly recommended!",
+    "image": "/customer_priya.png"
+  },
+  {
+    "id": "3",
+    "name": "Amit Patel",
+    "location": "Ahmedabad, Gujarat",
+    "rating": 5,
+    "review": "Running my factory on solar power is amazing. I reduced my operating costs by 70%. The team provided excellent after-sales support too.",
+    "image": "/customer_amit.png"
+  }
+]

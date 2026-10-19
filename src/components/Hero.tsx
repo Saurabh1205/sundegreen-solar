@@ -28,11 +28,25 @@ export default function Hero(){
       })
       if (!res.ok) throw new Error('Failed to submit')
       setSuccess(true)
+
+      const cleanPhone = whatsapp.replace(/\D/g, '')
+      const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
+      const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Your rooftop solar enquiry has been received:\n• Customer Name: ${name}\n• PIN Code: ${pincode}\n• Monthly Bill: ₹${bill}\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
+      
+      const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`
+      setTimeout(() => {
+        try {
+          window.open(waUrl, '_blank')
+        } catch (e) {
+          // ignore
+        }
+      }, 600)
+
       setName('')
       setWhatsapp('')
       setPincode('')
       setBill('')
-      setTimeout(() => setSuccess(false), 4000)
+      setTimeout(() => setSuccess(false), 6000)
     }catch(err: unknown){
       const errMsg = err instanceof Error ? err.message : 'Submission failed'
       setError(errMsg)

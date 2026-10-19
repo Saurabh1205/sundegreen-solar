@@ -1,0 +1,142 @@
+[
+  {
+    "id": "solar-panel",
+    "name": "Solar Panel",
+    "hsn": "85414012",
+    "costPrice": 12000,
+    "rate": 14450,
+    "per": "NOS",
+    "cgstRate": 2.5,
+    "sgstRate": 2.5
+  },
+  {
+    "id": "solar-inverter",
+    "name": "SOLAR INVERTER",
+    "hsn": "85044090",
+    "costPrice": 9500,
+    "rate": 11950,
+    "per": "NOS",
+    "cgstRate": 2.5,
+    "sgstRate": 2.5
+  },
+  {
+    "id": "base-plate",
+    "name": "BASE PLATE",
+    "hsn": "72109010",
+    "costPrice": 200,
+    "rate": 260,
+    "per": "KGS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "gi-tube",
+    "name": "GI TUBE",
+    "hsn": "730619",
+    "costPrice": 110,
+    "rate": 141.67,
+    "per": "KGS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "electric-item",
+    "name": "ELECTRIC ITEM",
+    "hsn": "39172310",
+    "costPrice": 800,
+    "rate": 1020,
+    "per": "NOS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "labour-charges",
+    "name": "LABOUR CHARGES",
+    "hsn": "995421",
+    "costPrice": 0,
+    "rate": 3500,
+    "per": "NOS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "dcdb-2-in-2-out",
+    "name": "DCDB - 2 IN 2 OUT",
+    "hsn": "85371000",
+    "costPrice": 3500,
+    "rate": 4500,
+    "per": "NOS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "acdb-1-phase-3kw",
+    "name": "ACDB – SINGAL PHASE SYSTEM(3 KW)",
+    "hsn": "85371000",
+    "costPrice": 4200,
+    "rate": 5500,
+    "per": "NOS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "cable-ac-4mm",
+    "name": "4 SQ. MM 2 CORE AC CABLE – (POLYCAB)",
+    "hsn": "74130000",
+    "costPrice": 60,
+    "rate": 80,
+    "per": "MTR",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "cable-earthing-16mm",
+    "name": "16 SQ. MM EARTHING CABLE",
+    "hsn": "74130000",
+    "costPrice": 90,
+    "rate": 120,
+    "per": "MTR",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "cable-dc-4mm",
+    "name": "4 SQ MM 2 CORE DC CABLE (POLYCAB)",
+    "hsn": "74130000",
+    "costPrice": 70,
+    "rate": 90,
+    "per": "MTR",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "earthing-rod-chemical",
+    "name": "Earthling Rod with Chemical Bag",
+    "hsn": "85359090",
+    "costPrice": 1400,
+    "rate": 1800,
+    "per": "NOS",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "gi-structure-hot-dip",
+    "name": "GI Structure Hot Dip",
+    "hsn": "73089090",
+    "costPrice": 12000,
+    "rate": 15000,
+    "per": "SET",
+    "cgstRate": 9,
+    "sgstRate": 9
+  },
+  {
+    "id": "electric-accessories",
+    "name": "Electric Accessories",
+    "hsn": "85389090",
+    "costPrice": 1000,
+    "rate": 1500,
+    "per": "SET",
+    "cgstRate": 9,
+    "sgstRate": 9
+  }
+]

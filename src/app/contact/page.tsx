@@ -1,11 +1,17 @@
 import ContactForm from '../../components/ContactForm'
+import { getSiteConfig } from '../../lib/firestore'
 
 export const metadata = {
   title: 'Contact Us - Sun Degreen Solar',
   description: 'Get in touch for a free solar consultation and quote.'
 }
 
-export default function ContactPage(){
+export default async function ContactPage(){
+  const config = await getSiteConfig()
+  const phone = config.phone || '+91 98765 43210'
+  const email = config.email || 'info@sundegreen.com'
+  const address = config.address || 'Mumbai, Maharashtra, India'
+
   return (
     <main className="pt-24 md:pt-28 pb-16 md:pb-24 bg-gradient-to-b from-white to-blue-50/30 min-h-screen">
       <div className="container">
@@ -23,21 +29,21 @@ export default function ContactPage(){
                   <span className="text-2xl text-green-600 mt-1">📞</span>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-1">Phone</h3>
-                    <p className="text-gray-600 font-500">+91 98765 43210</p>
+                    <p className="text-gray-600 font-500">{phone}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-2xl text-green-600 mt-1">📧</span>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-1">Email</h3>
-                    <p className="text-gray-600 font-500">info@sundegreen.com</p>
+                    <p className="text-gray-600 font-500">{email}</p>
                   </div>
                 </li>
                 <li className="flex items-start gap-4">
                   <span className="text-2xl text-green-600 mt-1">📍</span>
                   <div>
                     <h3 className="text-lg font-bold text-gray-900 mb-1">Office Address</h3>
-                    <p className="text-gray-600 font-500">Mumbai, Maharashtra, India</p>
+                    <p className="text-gray-600 font-500">{address}</p>
                   </div>
                 </li>
               </ul>

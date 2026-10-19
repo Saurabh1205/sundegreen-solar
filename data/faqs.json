@@ -1,0 +1,38 @@
+[
+  {
+    "id": "1",
+    "order": 1,
+    "question": "How much can I save with solar energy?",
+    "answer": "Most customers save 70-90% on their electricity bills. Your exact savings depend on your current consumption, location, and system size. We offer a free consultation to calculate your specific savings."
+  },
+  {
+    "id": "2",
+    "order": 2,
+    "question": "What is the installation time?",
+    "answer": "A typical residential installation takes 3-5 days. Commercial and industrial projects may take longer depending on system complexity. We provide a detailed timeline before starting work."
+  },
+  {
+    "id": "3",
+    "order": 3,
+    "question": "Do I need to maintain the solar panels?",
+    "answer": "Solar panels require minimal maintenance. We recommend cleaning them 2-3 times a year. We also offer comprehensive AMC services to keep your system running optimally."
+  },
+  {
+    "id": "4",
+    "order": 4,
+    "question": "What warranty do you provide?",
+    "answer": "We provide a 25-year warranty on panels and 10-year warranty on inverters. Our performance guarantee ensures your system operates at peak efficiency throughout the warranty period."
+  },
+  {
+    "id": "5",
+    "order": 5,
+    "question": "Are there government subsidies available?",
+    "answer": "Yes! The Government of India offers subsidies up to 40% on residential solar installations. Our team helps you navigate the subsidy process and maximizes your benefits."
+  },
+  {
+    "id": "6",
+    "order": 6,
+    "question": "Will solar panels work during monsoons?",
+    "answer": "Yes, solar panels generate electricity even on cloudy days. While output is reduced during heavy monsoons, modern panels are highly efficient and provide consistent energy throughout the year."
+  }
+]
