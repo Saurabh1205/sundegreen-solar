@@ -33,7 +33,7 @@ if (!apiKey || apiKey.includes('your_') || apiKey.length < 3) {
   console.log('1. On your mobile phone (' + phone + '), open WhatsApp.');
   console.log('2. Send this exact message:');
   console.log('   "I allow callmebot to send me messages"');
-  console.log('   to this WhatsApp number: +34 910 60 74 20  (or +34 944 58 13 89)');
+  console.log('   to this WhatsApp number: +34 623 78 64 49  (or +34 644 26 33 77)');
   console.log('3. CallMeBot will instantly reply with your API Key (e.g., 1234567).');
   console.log('4. Run this script again with your key:');
   console.log('   node scripts/test-callmebot.js <YOUR_API_KEY>\n');
