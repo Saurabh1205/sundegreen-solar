@@ -68,7 +68,7 @@ export default function QuotePage() {
       suggestedKw = Math.max(1, Math.round(billVal / 1000))
       brand = suggestedKw >= 5 ? 'Tata Power Solar' : suggestedKw >= 3 ? 'Waaree Mono Perc' : 'Adani Solar'
       baseCost = suggestedKw * 70000
-      
+
       // PM-Surya Ghar subsidy rules: 1 kW = 30k, 2 kW = 60k, >=3 kW = 78k max
       if (suggestedKw === 1) {
         subsidy = 30000
@@ -111,7 +111,7 @@ export default function QuotePage() {
       })
       const data = await res.json()
       if (!res.ok) throw new Error(data.error || 'Failed to submit.')
-      
+
       setLeadId(data.id)
       setCalculatedQuote({
         suggestedKw,
@@ -140,7 +140,7 @@ export default function QuotePage() {
       const cleanPhone = whatsapp.replace(/\D/g, '')
       const formattedPhone = cleanPhone.length === 10 ? `91${cleanPhone}` : cleanPhone
       const text = `☀️ Welcome ${name} to Sundegreen Solar! ☀️\n\nThank you for reaching out. Here is your customized rooftop solar estimate:\n\n📋 YOUR SOLAR PACKAGE DETAILS:\n• Customer Name: ${name}\n• Contact Number: ${whatsapp}\n• Service Requested: ${serviceType}\n• Monthly Bill: ₹${bill}\n• Suggested System Size: ${suggestedKw} kW (${brand})\n• Estimated Net Price: ₹${quotePrice.toLocaleString()}\n• Lead Priority: ${leadPriority}\n\n💰 GOVT SUBSIDY BENEFIT (PM Surya Ghar):\n• Up to ₹78,000 Subsidy Available!\n\n🌐 Official Website: https://www.sundegreensolar.in\n📞 Customer Care: +91 75077 71361`
-      
+
       const waUrl = `https://wa.me/${formattedPhone}?text=${encodeURIComponent(text)}`
       setTimeout(() => {
         try {
@@ -455,10 +455,10 @@ I'd like to proceed with booking a site survey.`
           ) : (
             /* DYNAMIC RESULTS SCREEN (EMI & INSPECTION MODULES) */
             <div id="print-area" className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-              
+
               {/* LEFT REPORT COLUMN */}
               <div className="lg:col-span-7 space-y-8">
-                
+
                 {/* Quote details report */}
                 <div className="bg-white rounded-3xl border border-gray-150 p-6 md:p-8 shadow-xl">
                   <div className="flex items-center justify-between border-b border-gray-100 pb-5 mb-5 flex-wrap gap-3">
@@ -467,13 +467,12 @@ I'd like to proceed with booking a site survey.`
                       <p className="text-xs text-gray-500">Prepared for: {name}</p>
                     </div>
                     {/* Priority Badge */}
-                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${
-                      calculatedQuote.leadPriority === 'Very High Priority' 
+                    <span className={`px-3 py-1 rounded-full text-xs font-bold ${calculatedQuote.leadPriority === 'Very High Priority'
                         ? 'bg-red-50 text-red-600 border border-red-200'
                         : calculatedQuote.leadPriority === 'High Priority'
-                        ? 'bg-amber-50 text-amber-600 border border-amber-200'
-                        : 'bg-green-50 text-green-600 border border-green-200'
-                    }`}>
+                          ? 'bg-amber-50 text-amber-600 border border-amber-200'
+                          : 'bg-green-50 text-green-600 border border-green-200'
+                      }`}>
                       {calculatedQuote.leadPriority} Lead
                     </span>
                   </div>
@@ -514,7 +513,7 @@ I'd like to proceed with booking a site survey.`
                 {/* MODULE 5: EMI CALCULATOR */}
                 <div ref={emiRef} className="bg-white rounded-3xl border border-gray-150 p-6 md:p-8 shadow-xl relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-24 h-24 bg-green-500/5 rounded-full blur-xl pointer-events-none"></div>
-                  
+
                   <h3 className="text-xl font-bold text-gray-900 mb-2 flex items-center gap-2">
                     <span>🪙</span> Solar EMI Calculator
                   </h3>
@@ -537,11 +536,10 @@ I'd like to proceed with booking a site survey.`
                           <button
                             key={dur}
                             onClick={() => setEmiDuration(dur)}
-                            className={`py-2 text-xs md:text-sm rounded-xl font-bold transition-all border ${
-                              emiDuration === dur
+                            className={`py-2 text-xs md:text-sm rounded-xl font-bold transition-all border ${emiDuration === dur
                                 ? 'bg-green-600 border-green-600 text-white shadow-md'
                                 : 'bg-white border-gray-200 text-gray-700 hover:bg-gray-50'
-                            }`}
+                              }`}
                           >
                             {dur} Mo
                           </button>
@@ -671,13 +669,12 @@ I'd like to proceed with booking a site survey.`
               <div className="lg:col-span-5 space-y-6 no-print">
                 <div className="bg-white rounded-3xl border border-gray-150 p-6 shadow-xl space-y-4">
                   <h3 className="text-lg font-bold text-gray-900 border-b border-gray-100 pb-3 mb-3">Solar Toolbox Actions</h3>
-                  
+
                   {/* Action checklist list */}
 
                   {/* 1. Get Quote On WhatsApp */}
                   <a
                     href={getWhatsAppShareLink()}
-                    target="_blank"
                     rel="noopener noreferrer"
                     className="flex items-center justify-center gap-2 bg-emerald-500 hover:bg-emerald-600 text-white w-full py-3 rounded-xl text-sm font-bold shadow-md transition transform hover:-translate-y-0.5 active:translate-y-0"
                   >
@@ -720,11 +717,10 @@ I'd like to proceed with booking a site survey.`
                   <button
                     onClick={handleCallbackRequest}
                     disabled={callbackRequested}
-                    className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold transition shadow-sm ${
-                      callbackRequested 
+                    className={`flex items-center justify-center gap-2 w-full py-3 rounded-xl text-sm font-bold transition shadow-sm ${callbackRequested
                         ? 'bg-green-50 text-green-700 border border-green-200 cursor-not-allowed'
                         : 'bg-blue-600 hover:bg-blue-700 text-white transform hover:-translate-y-0.5'
-                    }`}
+                      }`}
                   >
                     {callbackRequested ? '✓ Callback Registered!' : '📞 Call Me Within 30 Minutes'}
                   </button>
